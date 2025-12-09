@@ -1,8 +1,9 @@
 # 📘 Projeto Phoenix LiveView — README
 
-## 👤 Nome do Aluno
+## 👤 Dados
 
-Gabriel Felipe Carvalho Silva
+Aluno: Gabriel Felipe Carvalho Silva
+Disciplina: TÓPICOS EM ENGENHARIA DA COMPUTAÇÃO II - INTRODUÇÃO A PROGRAMAÇÃO FUNCIONAL
 
 ## 🔗 Link do Tutorial
 
