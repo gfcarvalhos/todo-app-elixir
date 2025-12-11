@@ -1,48 +1,37 @@
 defmodule ElixirTodoListWeb.TodoLive do
   use ElixirTodoListWeb, :live_view
 
-  # @impl true → indicamos que esta função faz parte do comportamento LiveView
   @impl true
   def mount(_params, _session, socket) do
-    # Nossa "memória" inicial: duas tarefas de exemplo
     tasks = [
       %{id: 1, title: "Comprar leite", completed: false},
       %{id: 2, title: "Aprender LiveView", completed: true}
     ]
 
-    # assign/3 coloca dados no socket (nosso estado de interface)
     socket =
       assign(socket,
         tasks: tasks,
-        # campo de texto começa vazio
         new_task_title: ""
       )
 
-    # {:ok, socket} → retorna o estado inicial ao LiveView
     {:ok, socket}
   end
 
-  # Captura o evento de digitação no campo
   @impl true
   def handle_event("update_form", %{"title" => new_title}, socket) do
-    # Atualiza o valor do campo no estado
     socket = assign(socket, new_task_title: new_title)
-    # retorna o socket atualizado sem recarregar a página
     {:noreply, socket}
   end
 
-  # Captura o evento de envio do formulário
   @impl true
   def handle_event("save_task", %{"title" => title}, socket) do
     if String.trim(title) != "" do
-      # Cria uma nova tarefa "em memória"
       new_task = %{
         id: System.unique_integer([:positive]),
         title: title,
         completed: false
       }
 
-      # Atualiza a lista de tarefas e limpa o campo
       socket =
         socket
         |> update(:tasks, fn tasks -> tasks ++ [new_task] end)
@@ -50,12 +39,10 @@ defmodule ElixirTodoListWeb.TodoLive do
 
       {:noreply, socket}
     else
-      # Ignora caso o campo esteja vazio
       {:noreply, socket}
     end
   end
 
-  # render/1 define o HTML que será exibido
   @impl true
   def render(assigns) do
     ~H"""
