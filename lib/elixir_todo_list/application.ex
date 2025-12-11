@@ -1,4 +1,4 @@
-defmodule TodoAppElixir.Application do
+defmodule ElixirTodoList.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -8,18 +8,18 @@ defmodule TodoAppElixir.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      TodoAppElixirWeb.Telemetry,
-      {DNSCluster, query: Application.get_env(:todo_app_elixir, :dns_cluster_query) || :ignore},
-      {Phoenix.PubSub, name: TodoAppElixir.PubSub},
-      # Start a worker by calling: TodoAppElixir.Worker.start_link(arg)
-      # {TodoAppElixir.Worker, arg},
+      ElixirTodoListWeb.Telemetry,
+      {DNSCluster, query: Application.get_env(:elixir_todo_list, :dns_cluster_query) || :ignore},
+      {Phoenix.PubSub, name: ElixirTodoList.PubSub},
+      # Start a worker by calling: ElixirTodoList.Worker.start_link(arg)
+      # {ElixirTodoList.Worker, arg},
       # Start to serve requests, typically the last entry
-      TodoAppElixirWeb.Endpoint
+      ElixirTodoListWeb.Endpoint
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: TodoAppElixir.Supervisor]
+    opts = [strategy: :one_for_one, name: ElixirTodoList.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
@@ -27,7 +27,7 @@ defmodule TodoAppElixir.Application do
   # whenever the application is updated.
   @impl true
   def config_change(changed, _new, removed) do
-    TodoAppElixirWeb.Endpoint.config_change(changed, removed)
+    ElixirTodoListWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end

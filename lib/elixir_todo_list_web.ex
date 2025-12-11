@@ -1,12 +1,12 @@
-defmodule TodoAppElixirWeb do
+defmodule ElixirTodoListWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, components, channels, and so on.
 
   This can be used in your application as:
 
-      use TodoAppElixirWeb, :controller
-      use TodoAppElixirWeb, :html
+      use ElixirTodoListWeb, :controller
+      use ElixirTodoListWeb, :html
 
   The definitions below will be executed for every controller,
   component, etc, so keep them short and clean, focused
@@ -40,7 +40,7 @@ defmodule TodoAppElixirWeb do
     quote do
       use Phoenix.Controller, formats: [:html, :json]
 
-      use Gettext, backend: TodoAppElixirWeb.Gettext
+      use Gettext, backend: ElixirTodoListWeb.Gettext
 
       import Plug.Conn
 
@@ -80,16 +80,16 @@ defmodule TodoAppElixirWeb do
   defp html_helpers do
     quote do
       # Translation
-      use Gettext, backend: TodoAppElixirWeb.Gettext
+      use Gettext, backend: ElixirTodoListWeb.Gettext
 
       # HTML escaping functionality
       import Phoenix.HTML
       # Core UI components
-      import TodoAppElixirWeb.CoreComponents
+      import ElixirTodoListWeb.CoreComponents
 
       # Common modules used in templates
       alias Phoenix.LiveView.JS
-      alias TodoAppElixirWeb.Layouts
+      alias ElixirTodoListWeb.Layouts
 
       # Routes generation with the ~p sigil
       unquote(verified_routes())
@@ -99,9 +99,9 @@ defmodule TodoAppElixirWeb do
   def verified_routes do
     quote do
       use Phoenix.VerifiedRoutes,
-        endpoint: TodoAppElixirWeb.Endpoint,
-        router: TodoAppElixirWeb.Router,
-        statics: TodoAppElixirWeb.static_paths()
+        endpoint: ElixirTodoListWeb.Endpoint,
+        router: ElixirTodoListWeb.Router,
+        statics: ElixirTodoListWeb.static_paths()
     end
   end
 

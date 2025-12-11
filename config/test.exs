@@ -2,13 +2,13 @@ import Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :todo_app_elixir, TodoAppElixirWeb.Endpoint,
+config :elixir_todo_list, ElixirTodoListWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
-  secret_key_base: "kJHk7MogT1cdR90NNgHZpMKSFVLG0gDZQWr0xofzpBpAyAlJXsJ5TdKrxWZTaWMY",
+  secret_key_base: "nZWnb3dcWk+R9wfzrNW0YcLaQ0xApjaxKwH54nSdevqJsOM5r0K0IJ66xPE60BRr",
   server: false
 
 # In test we don't send emails
-config :todo_app_elixir, TodoAppElixir.Mailer, adapter: Swoosh.Adapters.Test
+config :elixir_todo_list, ElixirTodoList.Mailer, adapter: Swoosh.Adapters.Test
 
 # Disable swoosh api client as it is only required for production adapters
 config :swoosh, :api_client, false

@@ -1,5 +1,5 @@
-defmodule TodoAppElixirWeb.PageControllerTest do
-  use TodoAppElixirWeb.ConnCase
+defmodule ElixirTodoListWeb.PageControllerTest do
+  use ElixirTodoListWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")

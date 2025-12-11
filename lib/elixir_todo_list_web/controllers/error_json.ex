@@ -1,4 +1,4 @@
-defmodule TodoAppElixirWeb.ErrorJSON do
+defmodule ElixirTodoListWeb.ErrorJSON do
   @moduledoc """
   This module is invoked by your endpoint in case of errors on JSON requests.
 

@@ -6,17 +6,17 @@ import Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we can use it
 # to bundle .js and .css sources.
-config :todo_app_elixir, TodoAppElixirWeb.Endpoint,
+config :elixir_todo_list, ElixirTodoListWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: {127, 0, 0, 1}],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "JO1tJwJJBeNFCiExFbAfohHaJR1+7TtbAADlXMOjWL0mCgkxBOUScLqW/qBUuUyk",
+  secret_key_base: "MgvhuJq9wZfZNYgGPcO9DyybxnNX2kheqBBrmyue5BuYGI7bS/yfNUwBRGOYT1GT",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:todo_app_elixir, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:todo_app_elixir, ~w(--watch)]}
+    esbuild: {Esbuild, :install_and_run, [:elixir_todo_list, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:elixir_todo_list, ~w(--watch)]}
   ]
 
 # ## SSL Support
@@ -43,7 +43,7 @@ config :todo_app_elixir, TodoAppElixirWeb.Endpoint,
 # different ports.
 
 # Reload browser tabs when matching files change.
-config :todo_app_elixir, TodoAppElixirWeb.Endpoint,
+config :elixir_todo_list, ElixirTodoListWeb.Endpoint,
   live_reload: [
     web_console_logger: true,
     patterns: [
@@ -52,13 +52,13 @@ config :todo_app_elixir, TodoAppElixirWeb.Endpoint,
       # Gettext translations
       ~r"priv/gettext/.*\.po$",
       # Router, Controllers, LiveViews and LiveComponents
-      ~r"lib/todo_app_elixir_web/router\.ex$",
-      ~r"lib/todo_app_elixir_web/(controllers|live|components)/.*\.(ex|heex)$"
+      ~r"lib/elixir_todo_list_web/router\.ex$",
+      ~r"lib/elixir_todo_list_web/(controllers|live|components)/.*\.(ex|heex)$"
     ]
   ]
 
 # Enable dev routes for dashboard and mailbox
-config :todo_app_elixir, dev_routes: true
+config :elixir_todo_list, dev_routes: true
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :default_formatter, format: "[$level] $message\n"

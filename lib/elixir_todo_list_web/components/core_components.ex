@@ -1,4 +1,4 @@
-defmodule TodoAppElixirWeb.CoreComponents do
+defmodule ElixirTodoListWeb.CoreComponents do
   @moduledoc """
   Provides core UI components.
 
@@ -27,7 +27,7 @@ defmodule TodoAppElixirWeb.CoreComponents do
 
   """
   use Phoenix.Component
-  use Gettext, backend: TodoAppElixirWeb.Gettext
+  use Gettext, backend: ElixirTodoListWeb.Gettext
 
   alias Phoenix.LiveView.JS
 
@@ -483,9 +483,9 @@ defmodule TodoAppElixirWeb.CoreComponents do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(TodoAppElixirWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(ElixirTodoListWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(TodoAppElixirWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(ElixirTodoListWeb.Gettext, "errors", msg, opts)
     end
   end
 

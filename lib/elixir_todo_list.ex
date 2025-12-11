@@ -1,6 +1,6 @@
-defmodule TodoAppElixir do
+defmodule ElixirTodoList do
   @moduledoc """
-  TodoAppElixir keeps the contexts that define your domain
+  ElixirTodoList keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless
