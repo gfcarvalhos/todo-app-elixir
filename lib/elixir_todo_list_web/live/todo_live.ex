@@ -48,6 +48,41 @@ defmodule ElixirTodoListWeb.TodoLive do
   end
 
   @impl true
+  def handle_event("delete", %{"id" => id}, socket) do
+    task = Repo.get(Task, id)
+
+    if task do
+      {:ok, _} = Repo.delete(task)
+    end
+
+    socket_atualizado =
+      assign(socket, :tasks, Repo.all(Task))
+      |> put_flash(:info, "Tarefa removida com sucesso!")
+
+    {:noreply, socket_atualizado}
+  end
+
+  @impl true
+  def handle_event("toggle_complete", %{"id" => id, "task" => task_params}, socket) do
+    # 1. Busca a tarefa correspondente no banco
+    task = Repo.get!(Task, id)
+
+    # 2. Determina o novo estado do checkbox
+    completed_status = Map.has_key?(task_params, "completed")
+
+    # 3. Cria um changeset de atualização
+    changeset = Task.changeset(task, %{completed: completed_status})
+
+    # 4. Atualiza o registro no banco de dados
+    Repo.update(changeset)
+
+    # 5. Atualiza a lista de tarefas no estado do LiveView
+    socket = assign(socket, tasks: Repo.all(Task))
+
+    {:noreply, socket}
+  end
+
+  @impl true
   def render(assigns) do
     ~H"""
     <div class="w-full max-w-lg mx-auto mt-12 p-6 bg-white rounded-lg shadow-md">
@@ -66,10 +101,40 @@ defmodule ElixirTodoListWeb.TodoLive do
       
       <div class="mt-8">
         <ul id="task-list">
-          <li :for={task <- @tasks} class="flex justify-between items-center p-3 border-b">
-            <span class={if task.completed, do: "line-through text-gray-500", else: "text-gray-900"}>
-              {task.title}
-            </span>
+          <li
+            :for={task <- @tasks}
+            id={"task-#{task.id}"}
+            class="flex justify-between items-center p-3 border-b"
+          >
+            <% task_form = Task.changeset(task, %{}) |> to_form() %>
+            <.form
+              for={task_form}
+              phx-change="toggle_complete"
+              phx-value-id={task.id}
+              class="flex-grow"
+            >
+              <div class="flex items-center space-x-4">
+                <.input
+                  type="checkbox"
+                  field={task_form[:completed]}
+                  class="flex-shrink-0"
+                />
+                <label class={
+                  if task.completed, do: "line-through text-gray-500", else: "text-gray-900"
+                }>
+                  {task.title}
+                </label>
+              </div>
+            </.form>
+            
+            <.button
+              type="button"
+              phx-click="delete"
+              phx-value-id={task.id}
+              class="!p-1 !bg-red-500 hover:!bg-red-700"
+            >
+              &times;
+            </.button>
           </li>
         </ul>
       </div>
